@@ -14,6 +14,7 @@ from faster_whisper import WhisperModel
 from langchain.chains import LLMChain
 from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
+from llama_index.utils.workflow import draw_all_possible_flows
 from tqdm import tqdm
 from transformers import pipeline
 from bark import SAMPLE_RATE
@@ -133,6 +134,8 @@ cooking_agent = AgentWorkflow.from_tools_or_functions(
 )
 ctx = Context(cooking_agent)
 
+# this is slow so better to run only from time to time
+# draw_all_possible_flows(cooking_agent, "cooking_agent_flow_dev.html")
 
 def speech_to_text(audio_path):
     """ Convert speech to text using FasterWhisper """
@@ -321,15 +324,20 @@ def run_itty_application():
         )
 
     # Launch the Gradio interface
-    app.launch(share=True)
+    app.launch(share=False)
+
 
 
 if __name__ == "__main__":
     run_itty_application()
-
 
 # for multiagents
 # Create agent configs
 # NOTE: we can use FunctionAgent or ReActAgent here.
 # FunctionAgent works for LLMs with a function calling API.
 # ReActAgent works for any LLM.
+"""
+# Create and run the workflow
+agent = AgentWorkflow(
+    agents=[calculator_agent, query_agent], root_agent="calculator"
+)

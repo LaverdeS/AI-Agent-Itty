@@ -9,8 +9,28 @@ A retrieval-augmented generation (RAG) agent for cooking that leverages [llama_i
 - **Web Search Integration:**  
   Retrieve up-to-date cooking content, trends, and external resources via web search.
 
-- **API Tools:**  
+- **API Tools (in_dev):**  
   Integrate with external APIs (e.g., recipe databases, nutritional info services) to enrich responses.
 
 - **Retrieval Augmented Generation (RAG):**  
   Combine indexed documents with generative models to provide comprehensive and context-aware cooking advice.
+
+## WorkFlow
+
+```
+from llama_index.core.agent.workflow import AgentWorkflow
+from llama_index.core.workflow import Context
+from llama_index.utils.workflow import draw_all_possible_flows
+
+cooking_agent = AgentWorkflow.from_tools_or_functions(
+    system_prompt=system_prompt,
+    tools_or_functions=[search_in_cookbook, search_web],
+    verbose=False,
+)
+ctx = Context(cooking_agent)
+draw_all_possible_flows(cooking_agent)
+```
+
+<p align="center">
+<img src="cooking_agent_workflow.png" alt="Workflow" width="500" />
+</p>

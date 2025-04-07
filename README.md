@@ -26,6 +26,7 @@ A workflow diagram or state diagram illustrates the control flow of an AI agent 
 - The process continues until a `StopEvent` occurs
 
 The following diagram was automatically generated using llama_index
+
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
 from llama_index.core.workflow import Context
@@ -55,4 +56,3 @@ draw_all_possible_flows(cooking_agent)
      * aggregate_tool_results
      * _done</figcaption>
 </figure>
-

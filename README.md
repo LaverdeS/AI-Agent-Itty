@@ -17,6 +17,15 @@ A retrieval-augmented generation (RAG) agent for cooking that leverages [llama_i
 
 ## WorkFlow
 
+A workflow diagram or state diagram illustrates the control flow of an AI agent system, showing how:
+
+- The workflow begins with a `StartEvent` triggering `init_run`
+- The agent gets set up, runs, and produces output
+- Tool calls are made based on agent output
+- Results from tools are aggregated and fed back to the agent
+- The process continues until a `StopEvent` occurs
+
+The following diagram was automatically generated using llama_index
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
 from llama_index.core.workflow import Context
@@ -31,6 +40,19 @@ ctx = Context(cooking_agent)
 draw_all_possible_flows(cooking_agent)
 ```
 
-<p align="center">
-<img src="cooking_agent_workflow.png" alt="Workflow" width="500" />
-</p>
+<figure>
+  <img src="cooking_agent_workflow.png" alt="Workflow" width="500" />
+  <figcaption>Events (in oval shapes):
+     * Purple: StartEvent
+     * Green: Various state transitions like AgentInput, AgentOutput, ToolCall, etc.
+     * StopEvent indicating workflow completion
+  * Actions/Functions (in blue rectangles):
+     * init_run
+     * setup_agent
+     * run_agent_step
+     * parse_agent_output
+     * call_tool
+     * aggregate_tool_results
+     * _done</figcaption>
+</figure>
+

@@ -9,10 +9,9 @@ import torch
 import gradio as gr
 import numpy as np
 import sounddevice as sd
-from dotenv import load_dotenv
+
 from faster_whisper import WhisperModel
 from langchain.chains import LLMChain
-from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
 from llama_index.utils.workflow import draw_all_possible_flows
 from tqdm import tqdm
@@ -135,7 +134,8 @@ cooking_agent = AgentWorkflow.from_tools_or_functions(
 ctx = Context(cooking_agent)
 
 # this is slow so better to run only from time to time
-# draw_all_possible_flows(cooking_agent, "cooking_agent_flow_dev.html")
+draw_all_possible_flows(cooking_agent, "cooking_agent_flow_dev.html")
+
 
 def speech_to_text(audio_path):
     """ Convert speech to text using FasterWhisper """
@@ -327,7 +327,6 @@ def run_itty_application():
     app.launch(share=False)
 
 
-
 if __name__ == "__main__":
     run_itty_application()
 
@@ -341,3 +340,4 @@ if __name__ == "__main__":
 agent = AgentWorkflow(
     agents=[calculator_agent, query_agent], root_agent="calculator"
 )
+"""

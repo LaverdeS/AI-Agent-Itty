@@ -135,8 +135,7 @@ ctx = Context(cooking_agent)
 
 # this is slow so better to run only from time to time
 draw_all_possible_flows(cooking_agent, "cooking_agent_flow_dev.html")
-import sys
-sys.exit()
+
 
 def speech_to_text(audio_path):
     """ Convert speech to text using FasterWhisper """
